@@ -88,4 +88,26 @@ while True:
         else:
             if current != last_status:
                 if current:
-                    send_teleg
+                    send_telegram(
+                        "🔥 네이버 브랜드스토어: 재입고(구매 가능) 상태로 변경됐어요!\n"
+                        f"👉 구매 페이지: {PRODUCT_URL}"
+                    )
+                else:
+                    send_telegram("📦 네이버 브랜드스토어: 상품이 품절 상태로 변경됐어요.")
+                last_status = current
+
+        # 정상 종료 시, 60~90초 사이 랜덤 대기
+        time.sleep(60 + random.uniform(0, 30))
+
+    except requests.exceptions.HTTPError as e:
+        if e.response.status_code == 429:
+            print("429 Too Many Requests: 10분간 대기 후 재시도", flush=True)
+            send_telegram("429 Too Many Requests: 너무 빠른 요청으로 인해 10분간 대기합니다.")
+            time.sleep(600)   # 10분 대기
+        else:
+            print("HTTP 에러:", e, flush=True)
+            time.sleep(30)    # 30초 대기 후 재시도
+
+    except Exception as e:
+        print("기타 에러:", e, flush=True)
+        time.sleep(30)
