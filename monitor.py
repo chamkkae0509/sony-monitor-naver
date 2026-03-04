@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 
 
 # 상품 페이지 URL
-PRODUCT_URL = "https://brand.naver.com/sonystore/products/12936145763"
+PRODUCT_URL = "https://brand.naver.com/sonystore/products/12971914173"
 
 # Telegram
 BOT_TOKEN = os.getenv("BOT_TOKEN")
