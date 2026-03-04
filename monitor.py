@@ -95,4 +95,5 @@ while True:
     except Exception as e:
         print("에러 발생:", repr(e), flush=True)
 
-    time.sleep(1800 + random.uniform(0, 1))
+    time.sleep(60 + random.uniform(0, 30))  # 60~90초 사이
+
